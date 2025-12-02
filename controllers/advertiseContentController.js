@@ -168,6 +168,8 @@ exports.createAdvertiseContent = async (req, res) => {
       slug,
       offerEndTime,
       thumbImage,
+      price,
+      originalPrice,
       regularImages,
       videos,
       discountShows,
@@ -181,6 +183,12 @@ exports.createAdvertiseContent = async (req, res) => {
     if (!title || !offerEndTime || !thumbImage) {
       return res.status(400).json({
         message: "Title, offer end time, and thumb image are required",
+      });
+    }
+
+    if (!price || price <= 0) {
+      return res.status(400).json({
+        message: "Price is required and must be greater than 0",
       });
     }
 
@@ -201,6 +209,8 @@ exports.createAdvertiseContent = async (req, res) => {
         slug: contentSlug,
         offerEndTime,
         thumbImage,
+        price: parseFloat(price),
+        originalPrice: parseFloat(originalPrice) || 0,
         regularImages: regularImages || [],
         videos: videos || [],
         discountShows: discountShows || [],
@@ -230,6 +240,8 @@ exports.createAdvertiseContent = async (req, res) => {
         slug: contentSlug,
         offerEndTime,
         thumbImage,
+        price: parseFloat(price),
+        originalPrice: parseFloat(originalPrice) || 0,
         regularImages: regularImages || [],
         videos: videos || [],
         discountShows: discountShows || [],
@@ -249,6 +261,7 @@ exports.createAdvertiseContent = async (req, res) => {
       });
     }
   } catch (error) {
+    console.error('Create content error:', error);
     return res.status(500).json({
       message: "Error creating advertise content",
       error: error.message,

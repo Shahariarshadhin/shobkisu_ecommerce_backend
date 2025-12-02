@@ -1,7 +1,23 @@
-const express = require('express')
-const router = express.Router()
-const advertiseOrderController = require('../controllers/advertiseOrderController')
+const express = require('express');
+const router = express.Router();
+const orderController = require('../controllers/advertiseOrderController');
 
-router.post('/', advertiseOrderController.createAdvertiseOrder)
+// Get order statistics
+router.get('/stats', orderController.getOrderStats);
 
-module.exports = router
+// Create new order
+router.post('/', orderController.createOrder);
+
+// Get all orders (supports query params: ?status=pending&contentId=123&phone=01234)
+router.get('/', orderController.getAllOrders);
+
+// Get single order by ID
+router.get('/:id', orderController.getOrderById);
+
+// Update order status
+router.put('/:id', orderController.updateOrderStatus);
+
+// Delete order
+router.delete('/:id', orderController.deleteOrder);
+
+module.exports = router;

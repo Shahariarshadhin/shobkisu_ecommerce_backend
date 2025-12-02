@@ -35,6 +35,10 @@ const AdvertiseContentSchema = new mongoose.Schema(
     videos: [{ type: String }],
     discountShows: [DiscountSchema],
     
+    // Pricing fields
+    price: { type: Number, required: true, min: 0 },
+    originalPrice: { type: Number, default: 0, min: 0 },
+    
     // Each section as a separate field
     section1: ContentSectionSchema,
     section2: ContentSectionSchema,
