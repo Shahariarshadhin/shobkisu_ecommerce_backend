@@ -8,6 +8,8 @@ const orderRoutes = require("./routes/orderRoutes");
 const advertiseOrderRoutes = require("./routes/advertiseOrderRoutes");
 const advertiseContentRoutes = require("./routes/advertiseContentRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 app.use(cors());
@@ -27,6 +29,8 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/advertise-orders", advertiseOrderRoutes);
 app.use("/api/advertise-contents", advertiseContentRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
